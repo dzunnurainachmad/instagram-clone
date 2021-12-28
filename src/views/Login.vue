@@ -1,19 +1,23 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
-  import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-  const email = ref<string>('')
-  const password = ref<string>('')
-  const auth = getAuth()
-  const login = async () => {
-    try {
-      const data = await signInWithEmailAndPassword(auth, email.value, password.value)
-      console.log(data);
-      
-    } catch (error) {
-      console.log(error);
-    }
-    
+import { ref } from 'vue'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useRouter } from 'vue-router'
+
+const email = ref<string>('')
+const password = ref<string>('')
+const auth = getAuth()
+const router = useRouter()
+
+const login = async () => {
+  try {
+    const data = await signInWithEmailAndPassword(auth, email.value, password.value)
+    console.log(data);
+    router.push({ name: "Home" })
+  } catch (error) {
+    console.log(error);
   }
+  
+}
   
 </script>
 
