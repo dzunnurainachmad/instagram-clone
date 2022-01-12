@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { useRouter } from 'vue-router'
 
 const email = ref<string>('')
 const password = ref<string>('')
 const auth = getAuth()
 const router = useRouter()
-
+const provider = new GoogleAuthProvider();
 const login = async () => {
   try {
     const data = await signInWithEmailAndPassword(auth, email.value, password.value)
@@ -17,6 +17,23 @@ const login = async () => {
     console.log(error);
   }
   
+}
+
+const loginGoogle = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider)
+    console.log(result);
+    const credential: any = GoogleAuthProvider.credentialFromResult(result)
+    const token = credential.accessToken
+    const user = result.user
+    router.push({ name: "Home" })
+    
+  } catch (error: any) {
+    const errorCode = error.code
+    const erroMessage = error.message
+    const email = error.email
+    const credential = GoogleAuthProvider.credentialFromError(error)
+  }
 }
   
 </script>
@@ -37,7 +54,7 @@ const login = async () => {
               <input type="password" placeholder="Password" class="border p-2 w-full text-sm" v-model="password">
             </div>
             <div class="w-full">
-              <button class="py-1 w-full bg-blue-500 text-white border rounded">Login</button>
+              <button class="py-1 w-full bg-blue-500 hover:bg-blue-400 text-white border rounded">Login</button>
             </div>
           </form>
         </div>
@@ -52,7 +69,7 @@ const login = async () => {
         </div>
         <div>
           <div class="flex justify-center mb-3">
-            <img src="../assets/btn_google_signin_light_normal_web@2x.png" alt="google" class="w-56">
+            <img @click.prevent="loginGoogle" src="../assets/btn_google_signin_light_normal_web@2x.png" alt="google" class="w-56">
           </div>
         </div>
         
