@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {  ref } from 'vue';
-import { getAuth, signOut } from "firebase/auth"
+import {  onMounted, ref } from 'vue';
+import { getAuth, onAuthStateChanged, signOut, updateCurrentUser } from "firebase/auth"
 import { useRouter } from "vue-router"
 
 const router = useRouter()
@@ -14,6 +14,8 @@ const logout = () => {
     .catch((error) => {
       console.log(error);
     })
+
+
 }
 
 </script>
