@@ -2,6 +2,7 @@
 import {  onMounted, ref } from 'vue';
 import { getAuth, onAuthStateChanged, signOut, updateCurrentUser } from "firebase/auth"
 import { useRouter } from "vue-router"
+import Navbar from "../components/Navbar.vue"
 
 const router = useRouter()
 const auth = getAuth()
@@ -21,9 +22,11 @@ const logout = () => {
 </script>
 
 <template>
-  <main>
+  <div>
+    <navbar/>
     <div>
       <button class="border p-2 rounded" @click="logout">Logout</button>
     </div>
-  </main>
+  </div>
+  
 </template>

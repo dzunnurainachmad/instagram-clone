@@ -14,6 +14,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "noImplicitAny": false,
+    "allowJs": true,
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true
   },
