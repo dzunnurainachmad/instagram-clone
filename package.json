@@ -8,6 +8,7 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "click-outside-vue3": "^4.0.1",
     "firebase": "^9.6.1",
     "pinia": "^2.0.6",
     "vue": "^3.2.26",
