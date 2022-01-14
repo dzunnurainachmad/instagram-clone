@@ -3,6 +3,8 @@ import { useUserStore } from '@/stores/user';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import { useMq } from 'vue3-mq'
+import { getAuth, signOut } from "firebase/auth"
+import { useRouter } from "vue-router"
 const mq = useMq()
 const userStore = useUserStore()
 const profilePop = ref(false)
@@ -13,7 +15,18 @@ const closeProfilePop = () => {
   profilePop.value = false
 }
 
-
+const router = useRouter()
+const auth = getAuth()
+const logout = () => {
+  signOut(auth)
+    .then(() => {
+      console.log('success logout');
+      router.push({ name: "Login" })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
 </script>
 <template>
   <div class="h-14 w-full border-b drop-shadow-sm flex justify-center items-center">
@@ -60,6 +73,9 @@ const closeProfilePop = () => {
               <div class="py-2 px-2 flex hover:bg-gray-100">
                 <Icon icon="mdi:cog" width="20" />
                 <div class="pl-2 text-sm">Settings</div>
+              </div>
+              <div class="py-2 px-2 flex hover:bg-gray-100 border-t" @click="logout">
+                <div class="text-sm">Log Out</div>
               </div>
             </div>
           </div>

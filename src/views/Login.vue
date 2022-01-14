@@ -18,6 +18,7 @@ const login = async () => {
     const current = auth.currentUser
     userStore.user = current
     router.push({ name: "Home" })
+  
   } catch (error) {
     console.log(error);
   }
