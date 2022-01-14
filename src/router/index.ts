@@ -29,12 +29,5 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach(async (to, from, next) => {
-//   const userStore = useUserStore()
-//   console.log(userStore.user, 'userStore');
-  
-//   if (to.meta.requiresAuth && !userStore.user) next('/login')
-//   else next()
-// })
 
 export default router

@@ -18,4 +18,5 @@ app.use(Vue3Mq, {
   }
 })
 
+
 app.mount('#app')

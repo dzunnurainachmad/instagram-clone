@@ -8,11 +8,8 @@ import { useRouter } from "vue-router"
 const mq = useMq()
 const userStore = useUserStore()
 const profilePop = ref(false)
-const openProfilePop = () => {
+const profilePopToggle = () => {
   profilePop.value = !profilePop.value
-}
-const closeProfilePop = () => {
-  profilePop.value = false
 }
 
 const router = useRouter()
@@ -58,10 +55,13 @@ const logout = () => {
             <Icon icon="mdi:heart-outline" width="24" />
           </div>
           <div class="pl-2 flex flex-col justify-center relative">
-            <div class="">
-              <img :src="userStore.user?.photoURL" alt="" class="rounded-full w-7 cursor-pointer" :class="`${profilePop? 'outline outline-gray-500': ''}`" @click.self="openProfilePop">
+            <div class="" >
+              <img v-if="userStore.user?.photoURL" :src="userStore.user?.photoURL" alt="" class="rounded-full w-7 cursor-pointer" :class="`${profilePop? 'outline outline-gray-500': ''}`" @click.self="profilePopToggle" >
+              <div v-else >
+                <Icon icon="gg:profile" width="24" @click.self="profilePopToggle" />
+              </div>
             </div>
-            <div v-if="profilePop" class="absolute w-40 top-10 -right-5 border bg-white shadow-sm rounded cursor-pointer" v-click-outside="closeProfilePop">
+            <div v-if="profilePop" class="absolute w-40 top-10 -right-5 border bg-white shadow-sm rounded cursor-pointer" v-click-outside="profilePopToggle">
               <div class="py-2 px-2 flex hover:bg-gray-100">
                 <Icon icon="iconoir:profile-circled" width="20" />
                 <div class="pl-2 text-sm">Profile</div>

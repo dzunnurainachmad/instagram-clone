@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
-import { onMounted } from 'vue';
+import { onMounted, onBeforeMount } from 'vue';
 import router from './router';
 import { useUserStore } from './stores/user';
 import { useMq } from 'vue3-mq'
 const mq = useMq()
-onMounted(() => {
+onBeforeMount(() => {
   const auth = getAuth()
   const userStore = useUserStore()
   onAuthStateChanged(auth, user => {
@@ -16,7 +16,6 @@ onMounted(() => {
       router.push({ name: 'Login'})
     }
   })
-  console.log(mq.current, 'mq.current');
   
 })
 </script>
