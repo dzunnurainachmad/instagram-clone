@@ -28,21 +28,21 @@ const logout = () => {
 <template>
   <div class="h-14 w-full border-b drop-shadow-sm flex justify-center items-center">
     <div class="sm:w-9/12 w-full">
-      <div class="flex justify-between">
-        <div class="flex items-center px-2">
+      <div class="flex">
+        <div :class="`flex items-center px-2 ${mq.current == 'sm'? 'basis-1/2': 'basis-1/3'}`">
           <img src="../assets/Instagram_logo.svg" alt="" class="w-24">
         </div>
-        <div class="flex justify-center" v-if="mq.current !== 'sm'">
-          <div class="flex bg-gray-200 rounded-md w-32 px-2">
+        <div class="basis-1/3 flex justify-center" v-if="mq.current !== 'sm'">
+          <div class="flex bg-gray-200 rounded-md w-60 px-2">
             <div class="flex items-center">
               <Icon icon="akar-icons:search" width="16"   />
             </div>
-            <input type="text" placeholder="Search" class="pl-2 w-24 outline-none rounded-sm bg-gray-200">
+            <input type="text" placeholder="Search" class="pl-2 w-52 outline-none rounded-sm bg-gray-200">
 
           </div>
         </div>
-        <div class="flex px-2">
-          <div class="pr-2 flex items-center">
+        <div :class="`${mq.current == 'sm'?'basis-1/2':'basis-1/3'} flex justify-end px-2`">
+          <div class="px-2 flex items-center">
             <Icon icon="mdi:home-variant-outline" width="24" />
           </div>
           <div class="px-2 flex items-center">
@@ -54,9 +54,9 @@ const logout = () => {
           <div class="px-2 flex items-center">
             <Icon icon="mdi:heart-outline" width="24" />
           </div>
-          <div class="pl-2 flex flex-col justify-center relative">
-            <div class="" >
-              <img v-if="userStore.user?.photoURL" :src="userStore.user?.photoURL" alt="" class="rounded-full w-7 cursor-pointer" :class="`${profilePop? 'outline outline-gray-500': ''}`" @click.self="profilePopToggle" >
+          <div class="px-2 flex flex-col justify-center relative">
+            <div class="w-6" >
+              <img v-if="userStore.user?.photoURL" :src="userStore.user?.photoURL" alt="" class="rounded-full w-6 cursor-pointer" :class="`${profilePop? 'outline outline-gray-500': ''}`" @click.self="profilePopToggle" >
               <div v-else >
                 <Icon icon="gg:profile" width="24" @click.self="profilePopToggle" />
               </div>
