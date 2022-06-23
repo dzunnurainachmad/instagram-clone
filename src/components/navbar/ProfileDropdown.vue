@@ -1,13 +1,19 @@
 <script setup lang="ts">
+
+// Implement v-click-outside to hide element with (v-if)
+
+
 import { useUserStore } from '@/stores/user';
 import { Icon } from '@iconify/vue';
 import { ref } from 'vue';
 import { useMq } from 'vue3-mq'
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "vue-router"
+
 const mq = useMq()
 const userStore = useUserStore()
 const profilePop = ref(false)
+
 const profilePopToggle = () => {
   profilePop.value = !profilePop.value
 }
@@ -29,7 +35,7 @@ const logout = () => {
   <div class="w-6" >
     <img v-if="userStore.user?.photoURL" :src="userStore.user?.photoURL" alt="" class="rounded-full w-6 cursor-pointer" :class="`${profilePop? 'outline outline-gray-500': ''}`" @click.self="profilePopToggle" >
     <div v-else >
-      <Icon icon="gg:profile" width="24" @click.prevent.self="profilePopToggle" />
+      <Icon icon="gg:profile" width="24" @click.stop="profilePopToggle" />
     </div>
   </div>
   <div v-if="profilePop" class="absolute w-40 top-10 -right-5 border bg-white shadow-sm rounded cursor-pointer" v-click-outside="profilePopToggle">

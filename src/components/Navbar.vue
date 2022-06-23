@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/vue';
 import { useMq } from 'vue3-mq'
 import ProfileDropdown from "./navbar/ProfileDropdown.vue"
+import Notification from './navbar/Notification.vue';
 const mq = useMq()
 </script>
 <template>
@@ -32,8 +33,8 @@ const mq = useMq()
           <div class="px-2 flex items-center">
             <Icon icon="mdi:compass-outline" width="24" />
           </div>
-          <div class="px-2 flex items-center">
-            <Icon icon="mdi:heart-outline" width="24" />
+          <div class="px-2 flex items-center relative">
+            <Notification/>
           </div>
           <div class="px-2 flex flex-col justify-center relative">
             <ProfileDropdown/>
